@@ -32,4 +32,4 @@ It serves as an introduction to modern web application development with JavaScri
 
 ### [Part 12 - Containers](./part12)
 
-### [Part 9 - Using Relational Databases](./part13)
+### [Part 13 - Using Relational Databases](./part13)
