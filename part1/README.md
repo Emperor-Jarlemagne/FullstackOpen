@@ -6,11 +6,12 @@ Understanding the React-Library, as well as the features of JavaScript that are 
 - [node](https://nodejs.org/en/download)
 
 ## Start The Application
-There is one application by folder, to start an application:
+There is one application by folder. 
+To start an application:
 
-## Head to the desired exercise (courseContent, unicafe or anecdotes)
+## Head to the desired exercise (courseinfo, unicafe or anecdotes)
 ```
- $ cd courseContent
+ $ cd courseinfo
  # Start the application
  $ npm start
  ```
