@@ -18,7 +18,7 @@ It serves as an introduction to modern web application development with JavaScri
 
 ### [Part 5 - Testing React apps](./part5)
 
-### [Part 6 - State management with Redux](./part6)
+### [Part 6 - Advanced State Management](./part6)
 
 ### [Part 7 - React router, custom hooks, styling app with CSS and webpack](./part7)
 
