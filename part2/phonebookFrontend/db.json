@@ -1,0 +1,24 @@
+{
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "040-1234567",
+      "id": 1
+    },
+    {
+      "name": "Jari Salminen",
+      "number": "416-4283496",
+      "id": "2"
+    },
+    {
+      "name": "Juha Paukku",
+      "number": "905-7733122",
+      "id": 3
+    },
+    {
+      "name": "Matti Korhonen",
+      "number": "888-7854422",
+      "id": "4"
+    }
+  ]
+}
