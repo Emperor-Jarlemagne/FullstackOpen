@@ -1,3 +1,8 @@
 node_modules
 public
 build
+coverage
+cypress
+.env
+.eslintignore
+.gitattributes
