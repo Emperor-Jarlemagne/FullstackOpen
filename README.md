@@ -4,7 +4,7 @@
 
 It serves as an introduction to modern web application development with JavaScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js. GraphQL, a modern alternative to REST APIs is also covered. As well as testing, configuration & environment management, and the use of MongoDB for storing the application’s data. A section on TypeScript, React Native, CI/CD, and Containers are also explored within the curriculum. This repository contains my solutions for this course's exercises.
 
-[course certificate]()
+[course certificate](https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/b4672aa3d87eb51e12f371a4542c17b6)
 
 ### [Part 0 - Fundamentals of Web apps](./part0)
 
