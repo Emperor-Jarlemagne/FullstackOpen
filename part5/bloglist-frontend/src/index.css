@@ -1,6 +1,6 @@
-
-
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: rgb(248, 37, 231);
   font-style: italic;
 }
@@ -17,7 +17,7 @@ button {
   padding: 10px;
   margin-bottom: 10px;
 }
-  
+
 .error {
   color: red;
   background: lightgrey;
@@ -27,7 +27,7 @@ button {
   padding: 10px;
   margin-bottom: 10px;
 }
-  
+
 .notification {
   color: green;
   background: lightgrey;
@@ -35,5 +35,5 @@ button {
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
