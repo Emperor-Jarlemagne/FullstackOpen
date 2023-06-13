@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Blog from "./components/Blog"
-import blogService from "./services/blogs"
-import loginService from "./services/login"
+import blogService from "./services/blogService"
+import loginService from "./services/loginService"
 import Notification from "./components/Notification"
 import LoginForm from "./components/loginForm"
 import BlogForm from "./components/blogForm"
 import Togglable from "./components/togglable"
+import { NotificationProvider } from "./NotificationContext"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -13,6 +14,8 @@ const App = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
+  const { dispatch } = useContext(NotificationContext)
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
@@ -31,8 +34,6 @@ const App = () => {
     }
   }, [])
 
-  const blogFormRef = useRef()
-
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -45,13 +46,17 @@ const App = () => {
       setUser(user)
       setUsername("")
       setPassword("")
+      dispatch({
+        type: "SET_NOTIFICATION",
+        payload: { text: "Successfully Logged In", type: "notification" },
+      })
     } catch (exception) {
-      setMessage({
-        text: "Wrong Credentials",
-        type: "error",
+      dispatch({
+        type: "SET_NOTIFICATION",
+        payload: { text: "Wrong Credentials", type: "error" },
       })
       setTimeout(() => {
-        setMessage(null)
+        dispatch({ type: "CLEAR_NOTIFICATION" })
       }, 5000)
     }
   }
@@ -74,21 +79,27 @@ const App = () => {
         if (blogFormRef.current) {
           blogFormRef.current.toggleVisibility()
         }
-        setMessage({
-          text: `${blogObject.title} by ${blogObject.author} added`,
-          type: "notification",
+        dispatch({
+          type: "SET_NOTIFICATION",
+          payload: {
+            text: `${blogObject.title} by ${blogObject.author} added`,
+            type: "notification",
+          }
         })
         setTimeout(() => {
-          setMessage(null)
+          dispatch({ type: "CLEAR_NOTIFICATION" })
         }, 5000)
       })
       .catch((error) => {
-        setMessage({
-          text: error.response.data.error,
-          type: "error",
+        dispatch({
+          type: "SET_NOTIFICATION",
+          payload: {
+            text: error.response.data.error,
+            type: "error",
+          }
         })
         setTimeout(() => {
-          setMessage(null)
+          dispatch({ type: "CLEAR_NOTIFICATION" })
         }, 5000)
       })
   }
@@ -98,24 +109,30 @@ const App = () => {
       await blogService.remove(id)
       setBlogs(blogs.filter((blog) => blog.id !== id))
     } catch (exception) {
-      setMessage({
-        text: `Error Deleting Blog ${exception.message}`,
-        type: "error",
+      dispatch({
+        type: "SET_NOTIFICATION",
+        payload: {
+          text: `Error Deleting Blog ${exception.message}`,
+          type: "error",
+        }
       })
       setTimeout(() => {
-        setMessage(null)
+        dispatch({ type: "CLEAR_NOTIFICATION" })
       }, 5000)
     }
   }
 
   const handleLikes = async (id, updatedBlog, updatedUser) => {
     if (!user) {
-      setMessage({
-        text: "Please Log In To Like a Blog",
-        type: "error",
+      dispatch({
+        type: "SET_NOTIFICATION",
+        payload: {
+          text: "Please Log In To Like a Blog",
+          type: "error",
+        }
       })
       setTimeout(() => {
-        setMessage(null)
+        dispatch({ type: "CLEAR_NOTIFICATION" })
       }, 5000)
     } else {
       try {
@@ -123,21 +140,25 @@ const App = () => {
         setBlogs(blogs.map((blog) => (blog.id === id ? updatedBlog : blog)))
         setUser(updatedUser)
       } catch (exception) {
-        setMessage({
-          text: `Error updating blog ${exception.message}`,
-          type: "error",
+        dispatch({
+          type: "SET_NOTIFICATION",
+          payload: {
+            text: `Error updating blog ${exception.message}`,
+            type: "error",
+          }
         })
         setTimeout(() => {
-          setMessage(null)
+          dispatch({ type: "CLEAR_NOTIFICATION" })
         }, 5000)
       }
     }
   }
 
   return (
+    <NotificationProvider>
     <div>
       <h1>BLOGS</h1>
-      <Notification message={message} />
+      <Notification />
       {!user && (
         <Togglable buttonLabel="Log In">
           <LoginForm
@@ -173,6 +194,7 @@ const App = () => {
           ))}
       </ul>
     </div>
+    </NotificationProvider>
   )
 }
 export default App

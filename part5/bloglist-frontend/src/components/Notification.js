@@ -1,10 +1,18 @@
-const Notification = ({ message }) => {
-  if (message === null) {
+import React, { useContext } from 'react'
+import {NotificationContext} from '../NotificationContext'
+
+const Notification = () => {
+  const { notification, dispatch } = useContext(NotificationContext)
+
+  if (notification === null) {
     return null
   }
+
+  const { text, type } = notification
+
   return (
-    <div className={message.type === "error" ? "error" : "notification"}>
-      {message.text}
+    <div className={type === "error" ? "error" : "notification"}>
+      {text}
     </div>
   )
 }
